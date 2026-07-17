@@ -1,7 +1,3 @@
 [build]
-  publish = "public"
-  functions = "netlify/functions"
+  publish = "."
   command = "echo 'Wedding invitation ready'"
-
-[functions]
-  node_bundler = "esbuild"
