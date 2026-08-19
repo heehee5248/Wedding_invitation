@@ -327,7 +327,7 @@ body.gallery-lightbox-open{overflow:hidden;touch-action:none}
   display:inline-block;margin-top:9px;padding:4px 9px;border-radius:999px;
   background:rgba(102,115,95,.1);font-size:13px;color:#66735f
 }
-.shuttle-note{margin:0!important;font-size:15px;color:var(--muted)}
+.shuttle-note{margin:0!important;font-size:15px;color:#665c52}
 .shuttle-groups{grid-column:1/-1;display:grid;gap:8px;margin-top:4px}
 .shuttle-group{border:1px solid rgba(216,202,184,.78);border-radius:13px;background:rgba(255,255,255,.55);overflow:hidden}
 .shuttle-group>summary{
@@ -344,17 +344,18 @@ body.gallery-lightbox-open{overflow:hidden;touch-action:none}
 .shuttle-route{padding:0}
 .shuttle-route+.shuttle-route{border-top:1px dashed rgba(216,202,184,.7)}
 .shuttle-route>summary{
-  position:relative;display:flex;align-items:center;justify-content:space-between;gap:8px;
-  padding:13px 24px 13px 0;list-style:none;cursor:pointer
+  display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:8px;
+  min-height:68px;padding:10px 0;list-style:none;cursor:pointer
 }
 .shuttle-route>summary::-webkit-details-marker{display:none}
 .shuttle-route>summary::after{
-  content:"⌄";position:absolute;right:1px;top:50%;transform:translateY(-58%);
-  color:#948779;font-size:15px;transition:transform .18s ease
+  content:"상세정보 보기";display:inline-flex;align-items:center;justify-content:center;
+  min-height:30px;padding:5px 9px;border:1px solid var(--line);border-radius:999px;
+  background:#fffdf9;color:#66735f;font-size:10px;font-weight:500;white-space:nowrap
 }
-.shuttle-route[open]>summary::after{transform:translateY(-38%) rotate(180deg)}
+.shuttle-route[open]>summary::after{content:"상세정보 접기";background:#66735f;color:#fff;border-color:#66735f}
 .shuttle-route h4{margin:0;font-size:14px;font-weight:600;color:#574d43}
-.shuttle-badge{flex:none;padding:3px 7px;border-radius:999px;background:rgba(125,140,116,.11);font-size:9px;color:#66735f}
+.shuttle-badge{padding:5px 9px;border-radius:999px;background:rgba(125,140,116,.14);font-size:12px;font-weight:600;color:#66735f;white-space:nowrap}
 .shuttle-info{display:grid;gap:5px;margin:0;padding:0 0 13px}
 .shuttle-info div{display:grid;grid-template-columns:125px minmax(0,1fr);gap:7px;font-size:12px;line-height:1.6}
 .shuttle-info dt{color:#948779;white-space:nowrap}
