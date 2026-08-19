@@ -344,21 +344,21 @@ body.gallery-lightbox-open{overflow:hidden;touch-action:none}
 .shuttle-route{padding:0}
 .shuttle-route+.shuttle-route{border-top:1px dashed rgba(216,202,184,.7)}
 .shuttle-route>summary{
-  display:grid;grid-template-columns:minmax(0,1fr) 82px 98px;align-items:center;gap:8px;
+  display:grid;grid-template-columns:minmax(0,1fr) 70px 74px;align-items:center;gap:6px;
   height:76px;padding:0;list-style:none;cursor:pointer
 }
 .shuttle-route>summary::-webkit-details-marker{display:none}
 .shuttle-route>summary::after{
-  content:"상세정보 보기";display:inline-flex;align-items:center;justify-content:center;
-  width:98px;height:34px;padding:0;border:1px solid var(--line);border-radius:999px;
-  background:#fffdf9;color:#66735f;font-size:11px;font-weight:500;white-space:nowrap
+  content:"상세보기";display:inline-flex;align-items:center;justify-content:center;
+  width:74px;height:32px;padding:0;border:1px solid var(--line);border-radius:999px;
+  background:#fffdf9;color:#66735f;font-size:10px;font-weight:500;white-space:nowrap
 }
-.shuttle-route[open]>summary::after{content:"상세정보 접기";background:#66735f;color:#fff;border-color:#66735f}
-.shuttle-route h4{margin:0;font-size:14px;font-weight:600;color:#574d43}
+.shuttle-route[open]>summary::after{content:"접기";background:#66735f;color:#fff;border-color:#66735f}
+.shuttle-route h4{margin:0;font-size:14px;font-weight:600;color:#574d43;white-space:nowrap}
 .shuttle-badge{
-  display:inline-flex;align-items:center;justify-content:center;width:82px;height:34px;padding:0;
+  display:inline-flex;align-items:center;justify-content:center;width:70px;height:32px;padding:0;
   border:1px solid rgba(125,140,116,.22);border-radius:999px;background:rgba(125,140,116,.12);
-  font-size:11px;font-weight:500;color:#66735f;white-space:nowrap
+  font-size:10px;font-weight:500;color:#66735f;white-space:nowrap
 }
 .shuttle-info{display:grid;gap:5px;margin:0;padding:0 0 13px}
 .shuttle-info div{display:grid;grid-template-columns:125px minmax(0,1fr);gap:7px;font-size:12px;line-height:1.6}
