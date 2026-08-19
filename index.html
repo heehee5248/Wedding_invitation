@@ -330,23 +330,32 @@ body.gallery-lightbox-open{overflow:hidden;touch-action:none}
 .shuttle-note{margin:0!important;font-size:15px;color:var(--muted)}
 .shuttle-groups{grid-column:1/-1;display:grid;gap:8px;margin-top:4px}
 .shuttle-group{border:1px solid rgba(216,202,184,.78);border-radius:13px;background:rgba(255,255,255,.55);overflow:hidden}
-.shuttle-group summary{
+.shuttle-group>summary{
   position:relative;padding:11px 38px 11px 13px;list-style:none;cursor:pointer;
   font-size:15px;font-weight:600;color:#574d43
 }
-.shuttle-group summary::-webkit-details-marker{display:none}
-.shuttle-group summary::after{
+.shuttle-group>summary::-webkit-details-marker{display:none}
+.shuttle-group>summary::after{
   content:"⌄";position:absolute;right:13px;top:50%;transform:translateY(-58%);
   color:#8f857a;font-size:18px;transition:transform .18s ease
 }
-.shuttle-group[open] summary::after{transform:translateY(-38%) rotate(180deg)}
+.shuttle-group[open]>summary::after{transform:translateY(-38%) rotate(180deg)}
 .shuttle-list{padding:0 13px 12px;border-top:1px solid rgba(216,202,184,.55)}
-.shuttle-card{padding:13px 0}
-.shuttle-card+.shuttle-card{border-top:1px dashed rgba(216,202,184,.7)}
-.shuttle-card-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:9px}
-.shuttle-card h4{margin:0;font-size:14px;font-weight:600;color:#574d43}
+.shuttle-route{padding:0}
+.shuttle-route+.shuttle-route{border-top:1px dashed rgba(216,202,184,.7)}
+.shuttle-route>summary{
+  position:relative;display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding:13px 24px 13px 0;list-style:none;cursor:pointer
+}
+.shuttle-route>summary::-webkit-details-marker{display:none}
+.shuttle-route>summary::after{
+  content:"⌄";position:absolute;right:1px;top:50%;transform:translateY(-58%);
+  color:#948779;font-size:15px;transition:transform .18s ease
+}
+.shuttle-route[open]>summary::after{transform:translateY(-38%) rotate(180deg)}
+.shuttle-route h4{margin:0;font-size:14px;font-weight:600;color:#574d43}
 .shuttle-badge{flex:none;padding:3px 7px;border-radius:999px;background:rgba(125,140,116,.11);font-size:9px;color:#66735f}
-.shuttle-info{display:grid;gap:5px;margin:0}
+.shuttle-info{display:grid;gap:5px;margin:0;padding:0 0 13px}
 .shuttle-info div{display:grid;grid-template-columns:125px minmax(0,1fr);gap:7px;font-size:12px;line-height:1.6}
 .shuttle-info dt{color:#948779;white-space:nowrap}
 .shuttle-info dd{margin:0;color:#665c52;text-align:right}
@@ -745,15 +754,15 @@ body.entry-locked{overflow:hidden}
             <details class="shuttle-group">
               <summary>신랑 측</summary>
               <div class="shuttle-list">
-                <article class="shuttle-card"><div class="shuttle-card-head"><h4>신랑 부모님 버스</h4><span class="shuttle-badge">일산 운행</span></div><dl class="shuttle-info"><div><dt>출발 장소</dt><dd>추후 안내</dd></div><div><dt>출발 시간</dt><dd>추후 안내</dd></div><div><dt>복귀버스&nbsp;출발&nbsp;시간</dt><dd>추후 안내</dd></div><div><dt>차량번호</dt><dd>추후 안내</dd></div><div><dt>담당자 연락처</dt><dd>추후 안내</dd></div></dl></article>
-                <article class="shuttle-card"><div class="shuttle-card-head"><h4>신랑 회사 버스</h4><span class="shuttle-badge">대전 운행</span></div><dl class="shuttle-info"><div><dt>출발 장소</dt><dd>추후 안내</dd></div><div><dt>출발 시간</dt><dd>추후 안내</dd></div><div><dt>복귀버스&nbsp;출발&nbsp;시간</dt><dd>추후 안내</dd></div><div><dt>차량번호</dt><dd>추후 안내</dd></div><div><dt>담당자 연락처</dt><dd>추후 안내</dd></div></dl></article>
+                <details class="shuttle-route"><summary><h4>신랑 부모님 버스</h4><span class="shuttle-badge">일산 운행</span></summary><dl class="shuttle-info"><div><dt>출발 장소</dt><dd>추후 안내</dd></div><div><dt>출발 시간</dt><dd>추후 안내</dd></div><div><dt>복귀버스&nbsp;출발&nbsp;시간</dt><dd>추후 안내</dd></div><div><dt>차량번호</dt><dd>추후 안내</dd></div><div><dt>담당자 연락처</dt><dd>추후 안내</dd></div></dl></details>
+                <details class="shuttle-route"><summary><h4>신랑 회사 버스</h4><span class="shuttle-badge">대전 운행</span></summary><dl class="shuttle-info"><div><dt>출발 장소</dt><dd>추후 안내</dd></div><div><dt>출발 시간</dt><dd>추후 안내</dd></div><div><dt>복귀버스&nbsp;출발&nbsp;시간</dt><dd>추후 안내</dd></div><div><dt>차량번호</dt><dd>추후 안내</dd></div><div><dt>담당자 연락처</dt><dd>추후 안내</dd></div></dl></details>
               </div>
             </details>
             <details class="shuttle-group">
               <summary>신부 측</summary>
               <div class="shuttle-list">
-                <article class="shuttle-card"><div class="shuttle-card-head"><h4>신부 부모님 버스</h4><span class="shuttle-badge">부산 운행</span></div><dl class="shuttle-info"><div><dt>출발 장소</dt><dd>추후 안내</dd></div><div><dt>출발 시간</dt><dd>추후 안내</dd></div><div><dt>복귀버스&nbsp;출발&nbsp;시간</dt><dd>추후 안내</dd></div><div><dt>차량번호</dt><dd>추후 안내</dd></div><div><dt>담당자 연락처</dt><dd>추후 안내</dd></div></dl></article>
-                <article class="shuttle-card"><div class="shuttle-card-head"><h4>신부 회사 버스</h4><span class="shuttle-badge">동탄 운행</span></div><dl class="shuttle-info"><div><dt>출발 장소</dt><dd>추후 안내</dd></div><div><dt>출발 시간</dt><dd>추후 안내</dd></div><div><dt>복귀버스&nbsp;출발&nbsp;시간</dt><dd>추후 안내</dd></div><div><dt>차량번호</dt><dd>추후 안내</dd></div><div><dt>담당자 연락처</dt><dd>추후 안내</dd></div></dl></article>
+                <details class="shuttle-route"><summary><h4>신부 부모님 버스</h4><span class="shuttle-badge">부산 운행</span></summary><dl class="shuttle-info"><div><dt>출발 장소</dt><dd>추후 안내</dd></div><div><dt>출발 시간</dt><dd>추후 안내</dd></div><div><dt>복귀버스&nbsp;출발&nbsp;시간</dt><dd>추후 안내</dd></div><div><dt>차량번호</dt><dd>추후 안내</dd></div><div><dt>담당자 연락처</dt><dd>추후 안내</dd></div></dl></details>
+                <details class="shuttle-route"><summary><h4>신부 회사 버스</h4><span class="shuttle-badge">동탄 운행</span></summary><dl class="shuttle-info"><div><dt>출발 장소</dt><dd>추후 안내</dd></div><div><dt>출발 시간</dt><dd>추후 안내</dd></div><div><dt>복귀버스&nbsp;출발&nbsp;시간</dt><dd>추후 안내</dd></div><div><dt>차량번호</dt><dd>추후 안내</dd></div><div><dt>담당자 연락처</dt><dd>추후 안내</dd></div></dl></details>
               </div>
             </details>
           </div>
