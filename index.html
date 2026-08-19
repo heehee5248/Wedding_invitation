@@ -330,16 +330,7 @@ body.gallery-lightbox-open{overflow:hidden;touch-action:none}
 .shuttle-note{margin:0!important;font-size:15px;color:#665c52}
 .shuttle-groups{grid-column:1/-1;display:grid;gap:8px;margin-top:4px}
 .shuttle-group{border:1px solid rgba(216,202,184,.78);border-radius:13px;background:rgba(255,255,255,.55);overflow:hidden}
-.shuttle-group>summary{
-  position:relative;padding:11px 38px 11px 13px;list-style:none;cursor:pointer;
-  font-size:15px;font-weight:600;color:#574d43
-}
-.shuttle-group>summary::-webkit-details-marker{display:none}
-.shuttle-group>summary::after{
-  content:"⌄";position:absolute;right:13px;top:50%;transform:translateY(-58%);
-  color:#8f857a;font-size:18px;transition:transform .18s ease
-}
-.shuttle-group[open]>summary::after{transform:translateY(-38%) rotate(180deg)}
+.shuttle-side-title{padding:11px 13px;font-size:15px;font-weight:600;color:#574d43}
 .shuttle-list{padding:0 13px;border-top:1px solid rgba(216,202,184,.55)}
 .shuttle-route{padding:0}
 .shuttle-route+.shuttle-route{border-top:1px dashed rgba(216,202,184,.7)}
@@ -756,20 +747,20 @@ body.entry-locked{overflow:hidden}
             <p class="shuttle-note">편안한 이동을 위해 전세버스를 운행합니다.</p>
           </div>
           <div class="shuttle-groups">
-            <details class="shuttle-group">
-              <summary>신랑 측</summary>
+            <div class="shuttle-group">
+              <div class="shuttle-side-title">신랑 측</div>
               <div class="shuttle-list">
                 <details class="shuttle-route"><summary><h4>신랑 부모님 버스</h4><span class="shuttle-badge">일산 운행</span></summary><dl class="shuttle-info"><div><dt>출발 장소</dt><dd>추후 안내</dd></div><div><dt>출발 시간</dt><dd>추후 안내</dd></div><div><dt>복귀버스&nbsp;출발&nbsp;시간</dt><dd>추후 안내</dd></div><div><dt>차량번호</dt><dd>추후 안내</dd></div><div><dt>담당자 연락처</dt><dd>추후 안내</dd></div></dl></details>
                 <details class="shuttle-route"><summary><h4>신랑 회사 버스</h4><span class="shuttle-badge">대전 운행</span></summary><dl class="shuttle-info"><div><dt>출발 장소</dt><dd>추후 안내</dd></div><div><dt>출발 시간</dt><dd>추후 안내</dd></div><div><dt>복귀버스&nbsp;출발&nbsp;시간</dt><dd>추후 안내</dd></div><div><dt>차량번호</dt><dd>추후 안내</dd></div><div><dt>담당자 연락처</dt><dd>추후 안내</dd></div></dl></details>
               </div>
-            </details>
-            <details class="shuttle-group">
-              <summary>신부 측</summary>
+            </div>
+            <div class="shuttle-group">
+              <div class="shuttle-side-title">신부 측</div>
               <div class="shuttle-list">
                 <details class="shuttle-route"><summary><h4>신부 부모님 버스</h4><span class="shuttle-badge">부산 운행</span></summary><dl class="shuttle-info"><div><dt>출발 장소</dt><dd>추후 안내</dd></div><div><dt>출발 시간</dt><dd>추후 안내</dd></div><div><dt>복귀버스&nbsp;출발&nbsp;시간</dt><dd>추후 안내</dd></div><div><dt>차량번호</dt><dd>추후 안내</dd></div><div><dt>담당자 연락처</dt><dd>추후 안내</dd></div></dl></details>
                 <details class="shuttle-route"><summary><h4>신부 회사 버스</h4><span class="shuttle-badge">동탄 운행</span></summary><dl class="shuttle-info"><div><dt>출발 장소</dt><dd>추후 안내</dd></div><div><dt>출발 시간</dt><dd>추후 안내</dd></div><div><dt>복귀버스&nbsp;출발&nbsp;시간</dt><dd>추후 안내</dd></div><div><dt>차량번호</dt><dd>추후 안내</dd></div><div><dt>담당자 연락처</dt><dd>추후 안내</dd></div></dl></details>
               </div>
-            </details>
+            </div>
           </div>
         </div>
       </div>
