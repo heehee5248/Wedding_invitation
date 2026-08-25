@@ -4,6 +4,24 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#f5efe6">
+<script>
+if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+const resetPageToTop = () => {
+  const root = document.documentElement;
+  const previousBehavior = root.style.scrollBehavior;
+  root.style.scrollBehavior = "auto";
+  window.scrollTo(0, 0);
+  root.scrollTop = 0;
+  if (document.body) document.body.scrollTop = 0;
+  root.style.scrollBehavior = previousBehavior;
+};
+resetPageToTop();
+window.addEventListener("pageshow", () => {
+  resetPageToTop();
+  requestAnimationFrame(resetPageToTop);
+  setTimeout(resetPageToTop, 80);
+});
+</script>
 <title>전재광 · 송정윤 결혼합니다</title>
 <meta name="description" content="2026년 11월 7일 토요일 오후 2시 · 아벤티움 서울 단독홀">
 <link rel="canonical" href="https://heehee5248.github.io/Wedding_invitation/">
