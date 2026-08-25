@@ -120,9 +120,12 @@ h2{font-size:25px;font-weight:500;letter-spacing:-.02em;margin-bottom:28px}
   font-family:"Great Vibes","Segoe Script",cursive;
   font-size:clamp(40px,10.5vw,48px);font-weight:400;line-height:.95;letter-spacing:.005em
 }
-.cover-names .cover-name{position:absolute;display:inline-block;white-space:nowrap}
-.cover-names .bride-name{left:2px;bottom:0}
-.cover-names .groom-name{right:2px;top:0}
+.cover-names .cover-name{
+  position:absolute;display:inline-block;white-space:nowrap;
+  padding:12px 16px;margin:-12px -16px
+}
+.cover-names .bride-name{left:10px;bottom:0}
+.cover-names .groom-name{right:10px;top:0}
 .cover-names .cover-amp{
   position:absolute;left:50%;top:50%;padding:0 1px;
   font-family:"Cormorant Garamond",Georgia,serif;font-size:.58em;
@@ -132,12 +135,12 @@ h2{font-size:25px;font-weight:500;letter-spacing:-.02em;margin-bottom:28px}
   opacity:0;clip-path:inset(0 100% 0 0);will-change:clip-path,opacity
 }
 .cover-names .cover-amp{opacity:0;will-change:transform,opacity}
-.arch.cover-ready~.cover-copy .bride-name{animation:nameWriteIn 1.2s cubic-bezier(.2,.72,.28,1) .35s both}
-.arch.cover-ready~.cover-copy .cover-amp{animation:ampWriteIn .55s ease 1.5s both}
-.arch.cover-ready~.cover-copy .groom-name{animation:nameWriteIn 1.25s cubic-bezier(.2,.72,.28,1) 1.9s both}
-.arch.cover-ready~.cover-copy .cover-date{animation:coverTextRise .8s ease 3.05s both}
-.arch.cover-ready~.cover-copy .cover-place{animation:coverTextRise .8s ease 3.22s both}
-.arch.cover-ready~.cover-copy .scroll-mark{animation:coverTextRise .8s ease 3.42s both}
+.arch.cover-ready~.cover-copy .bride-name{animation:nameWriteIn 1.85s cubic-bezier(.2,.72,.28,1) .4s both}
+.arch.cover-ready~.cover-copy .cover-amp{animation:ampWriteIn .7s ease 2.2s both}
+.arch.cover-ready~.cover-copy .groom-name{animation:nameWriteIn 1.9s cubic-bezier(.2,.72,.28,1) 2.75s both}
+.arch.cover-ready~.cover-copy .cover-date{animation:coverTextRise .9s ease 4.6s both}
+.arch.cover-ready~.cover-copy .cover-place{animation:coverTextRise .9s ease 4.82s both}
+.arch.cover-ready~.cover-copy .scroll-mark{animation:coverTextRise .9s ease 5.08s both}
 .arch.cover-ready~.cover-kicker{animation:coverKickerIn .9s ease .2s both}
 @keyframes nameWriteIn{
   0%{opacity:.2;clip-path:inset(0 100% 0 0)}
