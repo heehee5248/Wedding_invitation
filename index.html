@@ -356,9 +356,29 @@ body.gallery-lightbox-open{overflow:hidden;touch-action:none}
 .map-frame{
   width:100%;height:310px;margin:0 0 15px;border-radius:18px;overflow:hidden;
   border:1px solid rgba(205,188,167,.8);background:#ece7df;
-  box-shadow:0 12px 30px rgba(82,67,50,.08)
+  box-shadow:0 12px 30px rgba(82,67,50,.08);position:relative
 }
-.map-frame iframe{display:block;width:100%;height:100%;border:0}
+.kakao-map{position:absolute;inset:0;z-index:1;width:100%;height:100%;visibility:hidden}
+.map-frame.is-ready .kakao-map{visibility:visible}
+.map-fallback{
+  position:absolute;inset:0;z-index:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;padding:28px;text-align:center;
+  color:#71665b;background:
+    radial-gradient(circle at 50% 42%,rgba(125,140,116,.16),transparent 34%),
+    linear-gradient(145deg,#f2ede5,#e7e1d8)
+}
+.map-fallback-pin{
+  width:42px;height:42px;margin-bottom:12px;border-radius:50%;display:grid;place-items:center;
+  background:#66735f;color:#fff;font-size:21px;box-shadow:0 8px 18px rgba(82,67,50,.16)
+}
+.map-fallback strong{font-size:17px;font-weight:500;color:#51483f}
+.map-fallback span{margin-top:5px;font-size:13px;color:var(--muted)}
+.map-frame.is-ready .map-fallback{display:none}
+.kakao-map-label{
+  padding:7px 11px;border:1px solid rgba(102,115,95,.35);border-radius:999px;
+  background:rgba(255,253,248,.96);color:#51483f;font-size:12px;line-height:1.2;
+  white-space:nowrap;box-shadow:0 5px 14px rgba(55,47,39,.14)
+}
 .map-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .map-actions .btn{padding-left:7px;padding-right:7px;font-size:13px;white-space:nowrap}
 .btn{
@@ -768,14 +788,13 @@ body.entry-locked{overflow:hidden}
     <h2 class="venue">아벤티움 서울</h2>
     <p class="hall">단독홀</p>
     <p class="address"><span class="address-copy-line"><span>서울특별시 중구 청파로 464<br>브라운스톤서울 3층</span><button class="copy-address copy-value" type="button" data-copy="서울특별시 중구 청파로 464 브라운스톤서울 3층" aria-label="예식장 주소 복사">⧉</button></span><br><span class="venue-tel-line"><span class="venue-tel">T. 02-313-2480</span><a class="venue-call" href="tel:023132480" aria-label="아벤티움 서울에 전화하기"></a></span></p>
-    <div class="map-frame" aria-label="아벤티움 서울 위치 지도">
-      <iframe
-        title="아벤티움 서울 지도"
-        src="https://www.google.com/maps?q=%EC%95%84%EB%B2%A4%ED%8B%B0%EC%9B%80%20%EC%84%9C%EC%9A%B8%20%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%A4%91%EA%B5%AC%20%EC%B2%AD%ED%8C%8C%EB%A1%9C%20464%20%EB%B8%8C%EB%9D%BC%EC%9A%B4%EC%8A%A4%ED%86%A4%EC%84%9C%EC%9A%B8%203%EC%B8%B5&amp;output=embed"
-        loading="lazy"
-        allowfullscreen
-        referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
+    <div class="map-frame" id="mapFrame" aria-label="아벤티움 서울 위치 지도">
+      <div class="map-fallback" id="mapFallback" aria-live="polite">
+        <div class="map-fallback-pin" aria-hidden="true">⌖</div>
+        <strong>아벤티움 서울</strong>
+        <span>아래 지도 앱 버튼에서 위치를 확인해 주세요.</span>
+      </div>
+      <div class="kakao-map" id="kakaoMap" role="application" aria-label="확대하고 움직일 수 있는 카카오 지도"></div>
     </div>
     <div class="map-actions">
       <a class="btn" href="https://map.naver.com/p/search/%EC%B1%84%ED%94%8C%EC%9B%A8%EB%94%A9%ED%99%80%20%EC%95%84%EB%B2%A4%ED%8B%B0%EC%9B%80" target="_blank" rel="noopener">네이버 지도</a>
@@ -1040,6 +1059,7 @@ body.entry-locked{overflow:hidden}
 <div class="toast" id="toast" role="status"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js" crossorigin="anonymous"></script>
+<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=c245b3b4681c2ee9729c8b2159ccf0f1&amp;autoload=false"></script>
 <script>
 const target = new Date("2026-11-07T14:00:00+09:00").getTime();
 function tick(){
@@ -2474,6 +2494,52 @@ async function copyInvitationLink(){
 document.getElementById("linkCopyBtn").addEventListener("click",copyInvitationLink);
 const KAKAO_JAVASCRIPT_KEY="c245b3b4681c2ee9729c8b2159ccf0f1";
 if(window.Kakao&&!window.Kakao.isInitialized()) window.Kakao.init(KAKAO_JAVASCRIPT_KEY);
+
+function initializeKakaoMap(){
+  const frame=document.getElementById("mapFrame");
+  const container=document.getElementById("kakaoMap");
+  const fallback=document.getElementById("mapFallback");
+  if(!frame||!container||!window.kakao?.maps?.load){
+    if(fallback) fallback.querySelector("span").textContent="아래 지도 앱 버튼에서 위치를 확인해 주세요.";
+    return;
+  }
+
+  window.kakao.maps.load(()=>{
+    try{
+      const venuePosition=new window.kakao.maps.LatLng(37.5610639,126.9680806);
+      const map=new window.kakao.maps.Map(container,{
+        center:venuePosition,
+        level:4
+      });
+      map.setDraggable(true);
+      map.setZoomable(true);
+
+      const marker=new window.kakao.maps.Marker({
+        map,
+        position:venuePosition,
+        title:"아벤티움 서울"
+      });
+      const label=document.createElement("div");
+      label.className="kakao-map-label";
+      label.textContent="아벤티움 서울";
+      new window.kakao.maps.CustomOverlay({
+        map,
+        position:venuePosition,
+        content:label,
+        yAnchor:2.15
+      });
+      map.addControl(new window.kakao.maps.ZoomControl(),window.kakao.maps.ControlPosition.RIGHT);
+      frame.classList.add("is-ready");
+      requestAnimationFrame(()=>map.relayout());
+      window.addEventListener("orientationchange",()=>setTimeout(()=>map.relayout(),180),{passive:true});
+      void marker;
+    }catch(error){
+      console.error("카카오 지도를 표시하지 못했습니다.",error);
+    }
+  });
+}
+
+initializeKakaoMap();
 
 document.getElementById("kakaoShareBtn").addEventListener("click",()=>{
   if(!window.Kakao||!window.Kakao.isInitialized()){
