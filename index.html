@@ -1262,9 +1262,11 @@ function isAuthorizedAdminSession(session) {
 }
 
 function setAdminMode(session) {
-  const active = isAuthorizedAdminSession(session);
+  // A persisted Supabase session must never expose management controls on the
+  // public invitation URL. Admin controls are available only via ?admin=1.
+  const active = ADMIN_ENTRY_ENABLED && isAuthorizedAdminSession(session);
   adminSession = active ? session : null;
-  adminEntry.hidden = !(ADMIN_ENTRY_ENABLED || active);
+  adminEntry.hidden = !ADMIN_ENTRY_ENABLED;
   adminToggle.textContent = active ? "관리 종료" : "관리자 로그인";
   adminToggle.classList.toggle("active", active);
   photoAdminPanel.hidden = !active;
