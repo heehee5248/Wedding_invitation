@@ -1236,6 +1236,8 @@ let adminSession = null;
 let galleryLightboxItems = [];
 let galleryLightboxIndex = 0;
 let galleryTouchStartX = null;
+const GALLERY_HISTORY_KEY = "weddingGalleryLightbox";
+let galleryHistoryActive = false;
 
 function normalizeComment(row) {
   return {
@@ -1575,22 +1577,30 @@ function updateGalleryLightbox() {
   galleryLightboxNext.disabled = single;
 }
 
-function openGalleryLightbox(index) {
+function openGalleryLightbox(index, addHistory = true) {
   if (!galleryLightboxItems.length) return;
   galleryLightboxIndex = Math.max(0, Math.min(index, galleryLightboxItems.length - 1));
   updateGalleryLightbox();
   galleryLightbox.hidden = false;
   galleryLightbox.setAttribute("aria-hidden", "false");
   document.body.classList.add("gallery-lightbox-open");
+  if (addHistory && !history.state?.[GALLERY_HISTORY_KEY]) {
+    history.pushState({ ...(history.state || {}), [GALLERY_HISTORY_KEY]: true }, "", location.href);
+    galleryHistoryActive = true;
+  }
   galleryLightboxClose.focus({ preventScroll: true });
 }
 
-function closeGalleryLightbox() {
+function closeGalleryLightbox(fromHistory = false) {
   if (galleryLightbox.hidden) return;
   galleryLightbox.hidden = true;
   galleryLightbox.setAttribute("aria-hidden", "true");
   document.body.classList.remove("gallery-lightbox-open");
   galleryLightboxImage.removeAttribute("src");
+  if (!fromHistory && galleryHistoryActive && history.state?.[GALLERY_HISTORY_KEY]) {
+    galleryHistoryActive = false;
+    history.back();
+  }
 }
 
 function stepGalleryLightbox(delta) {
@@ -2362,6 +2372,21 @@ galleryLightbox.addEventListener("touchend", event => {
   if (Math.abs(delta) < 45) return;
   stepGalleryLightbox(delta > 0 ? -1 : 1);
 }, { passive: true });
+
+// Android back gestures/buttons and iPhone Safari/Kakao edge-swipe back
+// consume the lightbox history entry instead of leaving the invitation.
+window.addEventListener("popstate", event => {
+  const lightboxState = Boolean(event.state?.[GALLERY_HISTORY_KEY]);
+  if (!lightboxState && !galleryLightbox.hidden) {
+    galleryHistoryActive = false;
+    closeGalleryLightbox(true);
+    return;
+  }
+  if (lightboxState && galleryLightbox.hidden && galleryLightboxItems.length) {
+    galleryHistoryActive = true;
+    openGalleryLightbox(galleryLightboxIndex, false);
+  }
+});
 
 adminModal.addEventListener("click", event => {
   if (event.target === adminModal) closeAdminModal();
